@@ -5,6 +5,16 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [country, setcountry] = useState("Kenya");
   const [chanList, setchanList] = useState([]);
+  const [chanNow, setchanNow] = useState();
+
+  useEffect((station = "Classic 105") => {
+    fetch(`https://at1.api.radio-browser.info/json/stations/byname/${station}`)
+      .then((res) => res.json())
+      .then((data) => {
+        data.forEach((item) => setchanNow(item));
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
     fetch(
@@ -15,7 +25,6 @@ export default function Home() {
         setchanList(data);
       });
   }, [country]);
-  console.log(chanList);
   return (
     <div>
       <div className="flex">
@@ -63,19 +72,19 @@ export default function Home() {
           />
 
           <div className="pr-5">
-            <h3 className="text-white text-3xl">Maisha</h3>
-            <h3 className="text-white text-2xl">Hiphop</h3>
-            <p className="text-gray-400">Kenya</p>
+            <h3 className="text-white text-3xl">{chanNow?.name}</h3>
+            <h3 className="text-white text-2xl">{chanNow?.tags}</h3>
+            <p className="text-gray-400">{chanNow?.country}</p>
             <audio
               className="my-4 lg:w-72 w-60"
-              src=''
+              src={chanNow?.url}
               controls
               autoplay
             ></audio>
           </div>
         </div>
         <div className=" lg:w-7/12 border rounded overflow-y-auto ">
-         
+          
         </div>
       </div>
     </div>
