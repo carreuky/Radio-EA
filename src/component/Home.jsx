@@ -76,41 +76,14 @@ export default function Home() {
           >
             Rwanda
           </button></div>
-          <div className="lg:pl-[78px]">
+          <div className="lg:pl-[78px] hidden lg:block">
             <SearchInput setInput={setInput} />
           </div>
         </div>
-        {/* <div className=" lg:w-7/12">
-          <button
-            className="border text-white font-medium py-2 px-4 mr-2 mb-2 rounded-full"
-            onClick={() => setcountry("Kenya")}
-          >
-            Kenya
-          </button>
-          <button
-            className="border text-white font-medium py-2 px-4 mr-2 mb-2  rounded-full"
-            onClick={() => setcountry("Uganda")}
-          >
-            Uganda
-          </button>
-          <button
-            className="border text-white font-medium py-2 px-4 mr-2 mb-2  rounded-full"
-            onClick={() => setcountry("Tanzania")}
-          >
-            Tanzania
-          </button>
-          <button
-            className="border text-white font-medium py-2 px-4 mr-2 mb-2  rounded-full"
-            onClick={() => setcountry("Rwanda")}
-          >
-            Rwanda
-          </button>
-
-          <SearchInput setInput={setInput} />
-        </div> */}
+        
       </div>
 
-      <div className="lg:flex">
+      <div className="lg:flex lg:mt-2">
         <div className="lg:w-5/12 shadow-lg rounded p-3">
           <img
             className=" object-fit objcet-center w-full h-72 lg:w-3/4 object-cover object-center"
@@ -134,7 +107,11 @@ export default function Home() {
               controls
               autoplay
             ></audio>
+            <div className="lg:invisible ">
+            <SearchInput setInput={setInput} />
           </div>
+          </div>
+          
         </div>
         <div className=" lg:w-7/12 border rounded overflow-y-auto ">
           <div className="flex flex-wrap h-96">
