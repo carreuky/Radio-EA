@@ -3,14 +3,13 @@ import { BiRadio } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import RadioCard from "./RadioCard";
 import SearchInput from "./SearchInput";
+import { data } from "../data/data";
 
 export default function Home() {
   const [country, setcountry] = useState("Kenya");
   const [chanList, setchanList] = useState([]);
   const [chanNow, setchanNow] = useState();
   const [input, setInput] = useState("");
-  
-
 
   useEffect((station = "Classic 105") => {
     fetch(`https://at1.api.radio-browser.info/json/stations/byname/${station}`)
@@ -31,9 +30,8 @@ export default function Home() {
       });
   }, [country]);
 
-
   const filteredData = chanList.filter((chan) => {
-    if (input=== "") {
+    if (input === "") {
       return chan;
     } else {
       return chan.name.toLowerCase().includes(input.toLowerCase());
@@ -50,38 +48,26 @@ export default function Home() {
 
       <div className="flex flex-wrap">
         <p className="p-4 lg:w-5/12">
-        Your only East Africa online Radio App...
+          Your only East Africa online Radio App...
         </p>
         <div className="lg:w-7/12 flex flex-wrap ">
-          <div><button
-            className="border text-white font-medium py-2 px-4 mr-2 mb-2 rounded-full"
-            onClick={() => setcountry("Kenya")}
-          >
-            Kenya
-          </button>
-          <button
-            className="border text-white font-medium py-2 px-4 mr-2 mb-2  rounded-full"
-            onClick={() => setcountry("Uganda")}
-          >
-            Uganda
-          </button>
-          <button
-            className="border text-white font-medium py-2 px-4 mr-2 mb-2  rounded-full"
-            onClick={() => setcountry("Tanzania")}
-          >
-            Tanzania
-          </button>
-          <button
-            className="border text-white font-medium py-2 px-4 mr-2 mb-2  rounded-full"
-            onClick={() => setcountry("Rwanda")}
-          >
-            Rwanda
-          </button></div>
+          <div>
+            {data.map((data) => {
+              return (
+                <button 
+                key={data?.id}
+                className="border text-white font-medium py-2 px-4 mr-2 mb-2 rounded-full"
+                  onClick={() => setcountry(data.name)}
+                >
+                  {data.name}
+                </button>
+              );
+            })}
+          </div>
           <div className="lg:pl-[78px] hidden lg:block">
             <SearchInput setInput={setInput} />
           </div>
         </div>
-        
       </div>
 
       <div className="lg:flex lg:mt-2">
@@ -109,15 +95,20 @@ export default function Home() {
               autoPlay
             ></audio>
             <div className="lg:invisible">
-            <SearchInput setInput={setInput} />
+              <SearchInput setInput={setInput} />
+            </div>
           </div>
-          </div>
-          
         </div>
         <div className=" lg:w-7/12 border rounded overflow-y-auto ">
           <div className="flex flex-wrap mx-auto h-96">
             {filteredData.map((chan) => {
-              return <RadioCard key={chan?.stationuuid} chan={chan} setchanNow={setchanNow} />;
+              return (
+                <RadioCard
+                  key={chan?.stationuuid}
+                  chan={chan}
+                  setchanNow={setchanNow}
+                />
+              );
             })}
           </div>
         </div>
