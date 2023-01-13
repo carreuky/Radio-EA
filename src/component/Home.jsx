@@ -31,7 +31,6 @@ export default function Home() {
       });
   }, [country]);
 
-  console.log(chanNow);
 
   const filteredData = chanList.filter((chan) => {
     if (input=== "") {
@@ -53,7 +52,7 @@ export default function Home() {
         <p className="p-4 lg:w-5/12">
         Your only East Africa online Radio App...
         </p>
-        <div class="lg:w-7/12 flex flex-wrap ">
+        <div className="lg:w-7/12 flex flex-wrap ">
           <div><button
             className="border text-white font-medium py-2 px-4 mr-2 mb-2 rounded-full"
             onClick={() => setcountry("Kenya")}
@@ -118,7 +117,7 @@ export default function Home() {
         <div className=" lg:w-7/12 border rounded overflow-y-auto ">
           <div className="flex flex-wrap mx-auto h-96">
             {filteredData.map((chan) => {
-              return <RadioCard chan={chan} setchanNow={setchanNow} />;
+              return <RadioCard key={chan?.stationuuid} chan={chan} setchanNow={setchanNow} />;
             })}
           </div>
         </div>
