@@ -14,7 +14,7 @@ export default function RadioCard({chan,setchanNow}) {
           }
         alt={chan.name}
       />
-      <div class="flex flex-col items-center">
+      <div class="flex flex-col items-center w-36">
         <p class="text">{chan.name}</p>
         <p class="text-sm uppercase">{chan.country}</p>
       </div>

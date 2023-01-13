@@ -8,7 +8,7 @@ export default function Home() {
   const [country, setcountry] = useState("Kenya");
   const [chanList, setchanList] = useState([]);
   const [chanNow, setchanNow] = useState();
-  const [input, setInput] = useState('')
+  const [input, setInput] = useState("");
 
   useEffect((station = "Classic 105") => {
     fetch(`https://at1.api.radio-browser.info/json/stations/byname/${station}`)
@@ -29,15 +29,15 @@ export default function Home() {
       });
   }, [country]);
 
-  console.log(input)
+  console.log(chanNow);
 
   const filteredData = chanList.filter((chan) => {
-    if (input === '') {
-        return chan;
+    if (input === "") {
+      return chan;
     } else {
-        return chan.name.toLowerCase().includes(input)
+      return chan.name.toLowerCase().includes(input);
     }
-})
+  });
   return (
     <div>
       <div className="flex">
@@ -49,11 +49,41 @@ export default function Home() {
 
       <div className="flex flex-wrap">
         <p className="p-4 lg:w-5/12">
-          Where we get fast info from online radio streams
+        Your only East Africa online Radio App...
         </p>
-        <div className=" lg:w-7/12">
-          <button className="border text-white font-medium py-2 px-4 mr-2 mb-2 rounded-full"
-          onClick={() => setcountry("Kenya")}
+        <div class="lg:w-7/12 flex flex-wrap ">
+          <div><button
+            className="border text-white font-medium py-2 px-4 mr-2 mb-2 rounded-full"
+            onClick={() => setcountry("Kenya")}
+          >
+            Kenya
+          </button>
+          <button
+            className="border text-white font-medium py-2 px-4 mr-2 mb-2  rounded-full"
+            onClick={() => setcountry("Uganda")}
+          >
+            Uganda
+          </button>
+          <button
+            className="border text-white font-medium py-2 px-4 mr-2 mb-2  rounded-full"
+            onClick={() => setcountry("Tanzania")}
+          >
+            Tanzania
+          </button>
+          <button
+            className="border text-white font-medium py-2 px-4 mr-2 mb-2  rounded-full"
+            onClick={() => setcountry("Rwanda")}
+          >
+            Rwanda
+          </button></div>
+          <div className="lg:pl-[78px]">
+            <SearchInput setInput={setInput} />
+          </div>
+        </div>
+        {/* <div className=" lg:w-7/12">
+          <button
+            className="border text-white font-medium py-2 px-4 mr-2 mb-2 rounded-full"
+            onClick={() => setcountry("Kenya")}
           >
             Kenya
           </button>
@@ -75,14 +105,22 @@ export default function Home() {
           >
             Rwanda
           </button>
-        </div>
+
+          <SearchInput setInput={setInput} />
+        </div> */}
       </div>
 
       <div className="lg:flex">
         <div className="lg:w-5/12 shadow-lg rounded p-3">
           <img
-            className="w-full lg:w-3/4 object-cover object-center"
-            src="https://images.pexels.com/photos/3822728/pexels-photo-3822728.jpeg?auto=compress&cs=tinysrgb&w=400"
+            className=" object-fit objcet-center w-full h-72 lg:w-3/4 object-cover object-center"
+            // src={chanNow?.favicon}
+            src={
+              chanNow?.favicon === ""
+                ? "https://images.pexels.com/photos/3822728/pexels-photo-3822728.jpeg?auto=compress&cs=tinysrgb&w=400"
+                : chanNow?.favicon
+            }
+            // src="https://images.pexels.com/photos/3822728/pexels-photo-3822728.jpeg?auto=compress&cs=tinysrgb&w=400"
             alt="avatar"
           />
 
@@ -99,7 +137,6 @@ export default function Home() {
           </div>
         </div>
         <div className=" lg:w-7/12 border rounded overflow-y-auto ">
-          <SearchInput setInput={setInput}/>
           <div className="flex flex-wrap h-96">
             {filteredData.map((chan) => {
               return <RadioCard chan={chan} setchanNow={setchanNow} />;
