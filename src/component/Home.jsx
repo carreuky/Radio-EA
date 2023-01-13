@@ -2,11 +2,13 @@ import React from "react";
 import { BiRadio } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import RadioCard from "./RadioCard";
+import SearchInput from "./SearchInput";
 
 export default function Home() {
   const [country, setcountry] = useState("Kenya");
   const [chanList, setchanList] = useState([]);
   const [chanNow, setchanNow] = useState();
+  const [input, setInput] = useState('')
 
   useEffect((station = "Classic 105") => {
     fetch(`https://at1.api.radio-browser.info/json/stations/byname/${station}`)
@@ -26,13 +28,23 @@ export default function Home() {
         setchanList(data);
       });
   }, [country]);
+
+  console.log(input)
+
+  const filteredData = chanList.filter((chan) => {
+    if (input === '') {
+        return chan;
+    } else {
+        return chan.name.toLowerCase().includes(input)
+    }
+})
   return (
     <div>
       <div className="flex">
         <span className="text-8xl">
           <BiRadio />
         </span>
-        <span className=" text-5xl font-bold pt-10">Radio Mtaani</span>
+        <span className=" text-5xl font-bold lg:pt-10 pt-4">Radio Mtaani</span>
       </div>
 
       <div className="flex flex-wrap">
@@ -40,7 +52,9 @@ export default function Home() {
           Where we get fast info from online radio streams
         </p>
         <div className=" lg:w-7/12">
-          <button className="border text-white font-medium py-2 px-4 mr-2 mb-2 rounded-full">
+          <button className="border text-white font-medium py-2 px-4 mr-2 mb-2 rounded-full"
+          onClick={() => setcountry("Kenya")}
+          >
             Kenya
           </button>
           <button
@@ -85,8 +99,9 @@ export default function Home() {
           </div>
         </div>
         <div className=" lg:w-7/12 border rounded overflow-y-auto ">
+          <SearchInput setInput={setInput}/>
           <div className="flex flex-wrap h-96">
-            {chanList.map((chan) => {
+            {filteredData.map((chan) => {
               return <RadioCard chan={chan} setchanNow={setchanNow} />;
             })}
           </div>
