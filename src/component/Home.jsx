@@ -1,20 +1,21 @@
 import React from "react";
 import { BiRadio } from "react-icons/bi";
-import {useEffect, useState } from "react";
-
+import { useEffect, useState } from "react";
 
 export default function Home() {
-    const [country, setcountry] = useState("Kenya");
-    const [chanList, setchanList] = useState([]);
+  const [country, setcountry] = useState("Kenya");
+  const [chanList, setchanList] = useState([]);
 
-    useEffect(() => {
-        fetch(`https://at1.api.radio-browser.info/json/stations/bycountry/${country}`)
-          .then((res) => res.json())
-          .then((data) => {
-            setchanList(data)
-          });
-      }, [country]);
- console.log(chanList)
+  useEffect(() => {
+    fetch(
+      `https://at1.api.radio-browser.info/json/stations/bycountry/${country}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setchanList(data);
+      });
+  }, [country]);
+  console.log(chanList);
   return (
     <div>
       <div className="flex">
@@ -24,11 +25,35 @@ export default function Home() {
         <span className=" text-5xl font-bold pt-10">Radio Mtaani</span>
       </div>
 
-      <p>Where we get fast info from online radio streams</p>
-      {/* <form role="form" class="relative flex w-16 ml-2 mt-4  rounded-full">
-        <input type="text" placeholder="enter your search here" class="rounded-full flex-1 px-6 text-gray-700 focus:outline-none"/>
-        <button class="bg-indigo-500 text-white rounded-full font-semibold px-8 py-2 mx-2 hover:bg-indigo-400 focus:bg-indigo-600 focus:outline-none">Search</button>
-      </form> */}
+      <div className="flex flex-wrap">
+        <p className="p-4 lg:w-5/12">
+          Where we get fast info from online radio streams
+        </p>
+        <div className=" lg:w-7/12">
+          <button className="border text-white font-medium py-2 px-4 mr-2 mb-2 rounded-full">
+            Kenya
+          </button>
+          <button
+            className="border text-white font-medium py-2 px-4 mr-2 mb-2  rounded-full"
+            onClick={() => setcountry("Uganda")}
+          >
+            Uganda
+          </button>
+          <button
+            className="border text-white font-medium py-2 px-4 mr-2 mb-2  rounded-full"
+            onClick={() => setcountry("Tanzania")}
+          >
+            Tanzania
+          </button>
+          <button
+            className="border text-white font-medium py-2 px-4 mr-2 mb-2  rounded-full"
+            onClick={() => setcountry("Rwanda")}
+          >
+            Rwanda
+          </button>
+        </div>
+      </div>
+
       <div class="grid  lg:grid-cols-3 gap-4">
         <div class=" shadow-lg rounded p-3">
           <img
@@ -43,7 +68,6 @@ export default function Home() {
           </div>
         </div>
         <div class="lg:col-span-2 border rounded h-96">
-        
           <div className="flex">
             <div class="flex flex-col items-center p-2">
               <img

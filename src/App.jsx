@@ -9,9 +9,7 @@ function App() {
       <Home />
       <div className=" mt-8 flex justify-center">
         Carreuky Design
-        <span
-          className="text-2xl px-2 text-[#b91c1c]"
-        >
+        <span className="text-2xl px-2 text-[#b91c1c]">
           <RiHeartsFill />
         </span>
       </div>
