@@ -54,33 +54,28 @@ export default function Home() {
         </div>
       </div>
 
-      <div class="grid  lg:grid-cols-3 gap-4">
-        <div class=" shadow-lg rounded p-3">
+      <div className="lg:flex">
+        <div className="lg:w-5/12 shadow-lg rounded p-3">
           <img
-            class="w-full lg:w-3/4 object-cover object-center"
-            src="https://kingosiemo.files.wordpress.com/2022/01/wp-1641279009174.png?w=180"
+            className="w-full lg:w-3/4 object-cover object-center"
+            src="https://images.pexels.com/photos/3822728/pexels-photo-3822728.jpeg?auto=compress&cs=tinysrgb&w=400"
             alt="avatar"
           />
 
-          <div class="p-5">
-            <h3 class="text-white text-lg">Awake</h3>
-            <p class="text-gray-400">Tycho</p>
+          <div className="pr-5">
+            <h3 className="text-white text-3xl">Maisha</h3>
+            <h3 className="text-white text-2xl">Hiphop</h3>
+            <p className="text-gray-400">Kenya</p>
+            <audio
+              className="my-4 lg:w-72 w-60"
+              src=''
+              controls
+              autoplay
+            ></audio>
           </div>
         </div>
-        <div class="lg:col-span-2 border rounded h-96">
-          <div className="flex">
-            <div class="flex flex-col items-center p-2">
-              <img
-                class="object-cover w-32 h-32 my-2  shadow"
-                src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1260"
-                alt="Person"
-              />
-              <div class="flex flex-col items-center">
-                <p class="text-lg font-bold">Oliver Aguilerra</p>
-                <p class="text-sm ">Product Manager</p>
-              </div>
-            </div>
-          </div>
+        <div className=" lg:w-7/12 border rounded overflow-y-auto ">
+         
         </div>
       </div>
     </div>
