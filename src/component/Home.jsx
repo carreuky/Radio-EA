@@ -1,6 +1,7 @@
 import React from "react";
 import { BiRadio } from "react-icons/bi";
 import { useEffect, useState } from "react";
+import RadioCard from "./RadioCard";
 
 export default function Home() {
   const [country, setcountry] = useState("Kenya");
@@ -84,7 +85,11 @@ export default function Home() {
           </div>
         </div>
         <div className=" lg:w-7/12 border rounded overflow-y-auto ">
-          
+          <div className="flex flex-wrap h-96">
+            {chanList.map((chan) => {
+              return <RadioCard chan={chan} setchanNow={setchanNow} />;
+            })}
+          </div>
         </div>
       </div>
     </div>
