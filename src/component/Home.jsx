@@ -9,6 +9,8 @@ export default function Home() {
   const [chanList, setchanList] = useState([]);
   const [chanNow, setchanNow] = useState();
   const [input, setInput] = useState("");
+  
+
 
   useEffect((station = "Classic 105") => {
     fetch(`https://at1.api.radio-browser.info/json/stations/byname/${station}`)
@@ -32,10 +34,10 @@ export default function Home() {
   console.log(chanNow);
 
   const filteredData = chanList.filter((chan) => {
-    if (input === "") {
+    if (input=== "") {
       return chan;
     } else {
-      return chan.name.toLowerCase().includes(input);
+      return chan.name.toLowerCase().includes(input.toLowerCase());
     }
   });
   return (
@@ -84,7 +86,7 @@ export default function Home() {
       </div>
 
       <div className="lg:flex lg:mt-2">
-        <div className="lg:w-5/12 shadow-lg rounded p-3">
+        <div className="lg:w-5/12  rounded p-3">
           <img
             className=" object-fit objcet-center w-full h-72 lg:w-3/4 object-cover object-center"
             // src={chanNow?.favicon}
@@ -94,7 +96,7 @@ export default function Home() {
                 : chanNow?.favicon
             }
             // src="https://images.pexels.com/photos/3822728/pexels-photo-3822728.jpeg?auto=compress&cs=tinysrgb&w=400"
-            alt="avatar"
+            alt={chanNow?.name}
           />
 
           <div className="pr-5">
@@ -105,16 +107,16 @@ export default function Home() {
               className="my-4 lg:w-72 w-60"
               src={chanNow?.url}
               controls
-              autoplay
+              autoPlay
             ></audio>
-            <div className="lg:invisible ">
+            <div className="lg:invisible">
             <SearchInput setInput={setInput} />
           </div>
           </div>
           
         </div>
         <div className=" lg:w-7/12 border rounded overflow-y-auto ">
-          <div className="flex flex-wrap h-96">
+          <div className="flex flex-wrap mx-auto h-96">
             {filteredData.map((chan) => {
               return <RadioCard chan={chan} setchanNow={setchanNow} />;
             })}
