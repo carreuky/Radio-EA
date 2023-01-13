@@ -6,11 +6,13 @@ import SearchInput from "./SearchInput";
 import { data } from "../data/data";
 
 export default function Home() {
+  // global state
   const [country, setcountry] = useState("Kenya");
   const [chanList, setchanList] = useState([]);
   const [chanNow, setchanNow] = useState();
   const [input, setInput] = useState("");
 
+  // fetching url to from the station apis stations
   useEffect((station = "Classic 105") => {
     fetch(`https://at1.api.radio-browser.info/json/stations/byname/${station}`)
       .then((res) => res.json())
@@ -19,6 +21,8 @@ export default function Home() {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  // fetching url to from the country apis stations
 
   useEffect(() => {
     fetch(
@@ -30,6 +34,8 @@ export default function Home() {
       });
   }, [country]);
 
+  // filtering data from API.
+
   const filteredData = chanList.filter((chan) => {
     if (input === "") {
       return chan;
@@ -40,6 +46,7 @@ export default function Home() {
   return (
     <div>
       <div className="flex">
+        {/* //Heading */}
         <span className="text-8xl">
           <BiRadio />
         </span>
@@ -52,11 +59,12 @@ export default function Home() {
         </p>
         <div className="lg:w-7/12 flex flex-wrap ">
           <div>
+            {/* //mapping data to cards */}
             {data.map((data) => {
               return (
-                <button 
-                key={data?.id}
-                className="border text-white font-medium py-2 px-4 mr-2 mb-2 rounded-full"
+                <button
+                  key={data?.id}
+                  className="border text-white font-medium py-2 px-4 mr-2 mb-2 rounded-full"
                   onClick={() => setcountry(data.name)}
                 >
                   {data.name}
@@ -64,6 +72,7 @@ export default function Home() {
               );
             })}
           </div>
+          {/* Search component */}
           <div className="lg:pl-[78px] hidden lg:block">
             <SearchInput setInput={setInput} />
           </div>
@@ -74,13 +83,12 @@ export default function Home() {
         <div className="lg:w-5/12  rounded p-3">
           <img
             className=" object-fit objcet-center w-full h-72 lg:w-3/4 object-cover object-center"
-            // src={chanNow?.favicon}
+            //Getting a diffrent image url when the channel list string is empty
             src={
               chanNow?.favicon === ""
                 ? "https://images.pexels.com/photos/3822728/pexels-photo-3822728.jpeg?auto=compress&cs=tinysrgb&w=400"
                 : chanNow?.favicon
             }
-            // src="https://images.pexels.com/photos/3822728/pexels-photo-3822728.jpeg?auto=compress&cs=tinysrgb&w=400"
             alt={chanNow?.name}
           />
 
@@ -101,6 +109,7 @@ export default function Home() {
         </div>
         <div className=" lg:w-7/12 border rounded overflow-y-auto ">
           <div className="flex flex-wrap mx-auto h-96">
+            {/* //mapping data into radio card*/}
             {filteredData.map((chan) => {
               return (
                 <RadioCard

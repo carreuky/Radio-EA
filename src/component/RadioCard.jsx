@@ -1,15 +1,11 @@
 import React from "react";
 import { url } from "../data/url";
 
-
 export default function RadioCard({ chan, setchanNow }) {
-    console.log(url)
-    const months = ["January", "February", "March", "April", "May", "June", "July"];
+  // get a random url from the array
+  const random = Math.floor(Math.random() * url.length);
+  const pic = url[random];
 
-const random = Math.floor(Math.random() * url.length);
-const pic = url[random]
-console.log(url[random]);
-   
   return (
     <div
       className="cursor-pointer  mx-auto p-2"
@@ -19,7 +15,8 @@ console.log(url[random]);
         className="object-cover  w-32 lg:w-36 h-32 my-2 "
         src={
           chan.favicon === ""
-            ? `${pic}`
+            ? //inputting url to image tag
+              `${pic}`
             : chan.favicon
         }
         alt={chan.name}
