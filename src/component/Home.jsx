@@ -110,7 +110,7 @@ export default function Home() {
           </div>
         </div>
         <div className={`lg:w-7/12  rounded overflow-y-auto  ${ filteredData.length== 0 ? `` : `border`}`}>
-          <div className="flex flex-wrap mx-auto h-96">
+          <div className={`flex flex-wrap mx-auto  ${ filteredData.length== 0 ? `` : `h-96`}`}>
             {/* //mapping data into radio card*/}
             <p className="m-2">{filteredData.length== 0?'Radio not found':''}</p>
             {filteredData.map((chan) => {
