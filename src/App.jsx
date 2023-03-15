@@ -1,10 +1,11 @@
 import Home from "./component/Home";
-import { RiHeartsFill } from "react-icons/ri";
+import { RiHeartsFill } from "react-icons/ri"
+import {Analytics} from "@vercel/analytics/react"
 
-import "./App.css";
 
 function App() {
   return (
+    <>
     <div className="App p-8 pb-2 bg-[#052e3b] h-full font-poppins text-white">
       <Home />
       <div className=" mt-8 flex justify-center">
@@ -14,6 +15,8 @@ function App() {
         </span>
       </div>
     </div>
+    <Analytics/>
+    </>
   );
 }
 
